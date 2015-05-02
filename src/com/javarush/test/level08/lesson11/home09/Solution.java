@@ -18,33 +18,33 @@ public class Solution
     public static void main(String[] args)throws ParseException
     {
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM" + " dd yyyy", Locale.ENGLISH);
-        String sDate = dateFormat.format(date);
-        isDateOdd(sDate);
+        SimpleDateFormat fmt = new SimpleDateFormat("MMMMM dd yyyy", Locale.ENGLISH);
+        String current = fmt.format(date).toUpperCase();
+
+        System.out.println(isDateOdd(current));
     }
 
-    public static boolean isDateOdd(String date)throws ParseException
+    public static boolean isDateOdd(String date) throws ParseException
     {
-
-        System.out.println(date);
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat(("MMM").toUpperCase() + " dd yyyy", Locale.ENGLISH);
-        Date currentDate = dateFormat.parse(date);
-        Date yearStartTime = new Date();
-        yearStartTime.setHours(0);
-        yearStartTime.setMinutes(0);
-        yearStartTime.setSeconds(0);
-        yearStartTime.setDate(1);
-        yearStartTime.setMonth(0);
-
-        long msTimeDistance =
-
-
-
-
-
-
-        return true;
+        SimpleDateFormat df = new SimpleDateFormat("MMMMM dd yyyy", Locale.ENGLISH);
+        Date endDate = df.parse(date);
+        Date startDate = new Date();
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
+        startDate.setMonth(0);
+        startDate.setDate(0);
+        startDate.setYear(endDate.getYear());
+        long msDay = 24 * 60 * 60 * 1000;
+        long msData = endDate.getTime() - startDate.getTime();
+        int dayCount = (int) (msData / msDay) + 1;
+        if (dayCount % 2 == 0){
+            System.out.println(endDate + " = false");
+            return false;
+        } else {
+            System.out.println(endDate + " = true");
+            return true;
+        }
     }
 }
 
